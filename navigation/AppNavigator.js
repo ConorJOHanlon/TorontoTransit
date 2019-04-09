@@ -1,6 +1,10 @@
 import React from 'react';
 import { createDrawerNavigator, createAppContainer, DrawerItems} from 'react-navigation';
 import HomeScreen from '../screens/HomeScreen';
+import PrestoDefaultScreen from '../screens/PrestoDefaultScreen';
+import PrestoScreen from '../screens/PrestoScreen';
+import NewsScreen from '../screens/NewsScreen';
+import DirectionScreen from '../screens/DirectionScreen';
 import {
   Image,
   Platform,
@@ -37,13 +41,15 @@ const CustomDrawerContentComponent = (props) => (
 );
 
 const RootStack = createDrawerNavigator({
-    'Get Direction':HomeScreen,
+     Home :HomeScreen,
+    'Get Direction':DirectionScreen,
     'AR Camera': HomeScreen,
-    'Presto Card': HomeScreen,
-    News: HomeScreen,
-    Settings: HomeScreen,
+    'Presto Card': PrestoDefaultScreen,
+     News: NewsScreen,
+     Settings: PrestoScreen,
  
 },
+
    {contentOptions: {
       labelStyle: {
         fontSize: 20,

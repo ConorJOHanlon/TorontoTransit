@@ -13,54 +13,25 @@ import { DrawerActions } from 'react-navigation';
 import { WebBrowser, } from 'expo';
 import { MonoText } from '../components/StyledText';
 import Icon from "react-native-vector-icons/Ionicons";
+
 import { Font } from 'expo';
-export default class HomeScreen extends React.Component {
+export default class PrestoDefaultScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
-
-navigateToScreen = (route) => {
-        const navigationAction = NavigationActions.navigate({
-            routeName: route
-        })
-        this.props.navigation.dispatch(navigationAction)
-    }
 
 
 
   render() {
     return (
       <View style={styles.container}>
-      	<ImageBackground source={require('../assets/images/bg.png')} style={styles.bg}>
+      	<ImageBackground source={require('../assets/images/prestoDefaultScreen.png')} style={styles.bg}>
         <Icon
-        name="md-menu"
-        size={30}
+        name="md-arrow-round-back"
+        size={25}
         color='#2E2E2E'
         style={styles.hamburger}
         onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())} />
-		<View style={styles.rectangle}>
-			<View style={styles.sendContainer}>
-				<Text style={styles.headerText}>CAD 34.89</Text>
-				<Text style={styles.instructions}>Tapped Yesterday at 3:40pm</Text>
-				<View style={styles.buttonWrapper}>
-					<TouchableOpacity style={styles.actionButtons} onPress={() => this.props.navigation.navigate('Settings')} underlayColor='#fff'>
-	    					<Text style={[styles.submitText]}>View</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.actionButtons} onPress={() => this.props.navigation.navigate('Get Direction')} underlayColor='#fff'>
-	    					<Text style={[styles.submitText]}>Direction</Text>
-					</TouchableOpacity>
-				</View>
-				</View>
-		</View>
-		<View style={styles.bottomWrapper}>	
-			<View style={styles.bottomRedTab}>
-					<ImageBackground source={require('../assets/images/favourites.png')} style={styles.favourites} />
-			</View>
-		        <View style={styles.bottomRectangle}>
-				<ImageBackground source={require('../assets/images/queenStCar.png')} style={styles.bg} />
-			</View>
-			<View style={styles.bottomRectangle} />
-		</View>
   	</ImageBackground>
       </View>
     );
@@ -264,7 +235,7 @@ textRot: {
 },
 
 hamburger:{
-marginLeft:40,
-marginTop:70,
+marginLeft:20,
+marginTop:45,
 }
 });
