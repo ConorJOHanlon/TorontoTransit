@@ -13,34 +13,52 @@ import { DrawerActions } from 'react-navigation';
 import { WebBrowser, } from 'expo';
 import { MonoText } from '../components/StyledText';
 import Icon from "react-native-vector-icons/Ionicons";
-
 import { Font } from 'expo';
-export default class PrestoScreen extends React.Component {
+import ImageSequence from 'react-native-image-sequence';
+
+export default class CameraScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
 
   constructor(props) {
         super(props);
+        this.images = [
+          require('../assets/images/AR_Instruction1.png'),
+          require('../assets/images/AR_Instruction2.png'),
+          require('../assets/images/AR_Instruction3.png'),
+          require('../assets/images/AR_Instruction4.png'),
+        ];
+        this.next = this.next.bind(this);
+        this.state = {index: 0};
+    }
+
+    componentWillMount() {
+        this.next();
+    }
+
+    next() {
+        setTimeout(() => {
+            this.setState({index: (this.state.index+1)%4});
+            this.next();
+        }, 3000);
     }
 
   render() {
     return (
-      <View style={styles.container}>
-       <TouchableOpacity onPress={() => this.props.navigation.navigate(' ')}>
-      	<ImageBackground source={require('../assets/images/prestoScreen.png')} style={styles.bg}>
-		   <Icon
-        name="md-menu"
-        size={30}
+     <View style={styles.container}>
+        <ImageBackground source={this.images[this.state.index]} style={styles.bg}>
+        <Icon
+        name="md-close"
+        size={25}
         color='#2E2E2E'
         style={styles.hamburger}
-        onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())} />
-	</ImageBackground>
-    </TouchableOpacity>
+        onPress={() => this.props.navigation.navigate('Home')} />
+    </ImageBackground>
       </View>
-    );
-  }
-}
+        );
+      }
+    }
 
 const styles = StyleSheet.create({
   container: {
@@ -239,9 +257,7 @@ textRot: {
 },
 
 hamburger:{
-marginLeft:40,
-marginTop:70,
-zIndex:100,
-position:'absolute',
+marginLeft:20,
+marginTop: 45,
 }
 });
