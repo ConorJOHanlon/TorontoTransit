@@ -40,7 +40,7 @@ navigateToScreen = (route) => {
         onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())} />
 		<View style={styles.rectangle}>
 			<View style={styles.sendContainer}>
-				<Text style={styles.headerText}>CAD 34.89</Text>
+				<Text style={styles.headerText}><Image source={require("../assets/images/plusCircle.png")} style={{width: 22, height: 22,}}/>CAD 34.89</Text>
 				<Text style={styles.instructions}>Tapped Yesterday at 3:40pm</Text>
 				<View style={styles.buttonWrapper}>
 					<TouchableOpacity style={styles.actionButtons} onPress={() => this.props.navigation.navigate('Settings')} underlayColor='#fff'>

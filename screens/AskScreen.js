@@ -15,6 +15,7 @@ import { MonoText } from '../components/StyledText';
 import Icon from "react-native-vector-icons/Ionicons";
 import { Font } from 'expo';
 import ImageSequence from 'react-native-image-sequence';
+import { Slider } from 'react-native';
 
 export default class AskScreen extends React.Component {
   static navigationOptions = {
@@ -37,10 +38,6 @@ export default class AskScreen extends React.Component {
     }
 
     next() {
-        setTimeout(() => {
-            this.setState({index: (this.state.index+1)%3});
-            this.next();
-        }, 3000);
     }
 
   render() {
@@ -52,8 +49,32 @@ export default class AskScreen extends React.Component {
         size={25}
         color='#2E2E2E'
         style={styles.hamburger}
-        onPress={() => this.props.navigation.navigate('Settings')} />
+        onPress={() => {this.props.navigation.navigate('Settings');this.setState({ index: 0 })}} />
     </ImageBackground>
+     {this.state.index == 0 &&
+    <View style={styles.buttonWrapper}>
+    <TouchableOpacity style={styles.actionButtons} onPress={() => {this.props.navigation.navigate('Settings');this.setState({ index: 0 })}} >
+                <Text style={[styles.noText]}>No</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButtons} onPress={() =>  setTimeout(() => { this.setState({index: 1})}, 200)}>
+                <Text style={[styles.yesText]}>Yes</Text>
+          </TouchableOpacity>
+    </View>
+    }
+
+    {this.state.index == 1 &&
+      <View style={styles.buttonWrapper}>
+        <Slider
+          style={{width: '95%', height: 160}}
+          minimumValue={0}
+          maximumValue={1}
+          minimumTrackTintColor="#FFFFFF"
+          maximumTrackTintColor="#FFFFFF"
+          onSlidingComplete={() => {this.setState({ index: 2 })}}
+        />
+      </View>
+    }
+
       </View>
         );
       }
@@ -224,6 +245,7 @@ textRot: {
   },
 
  submit:{
+    fontWeight: '500',
     marginTop:50,
     paddingTop:20,
     paddingBottom:20,
@@ -233,16 +255,35 @@ textRot: {
     borderColor: '#fff',
     width:300,
   },
-  submitText:{
-      color:'#000',
+  yesText:{
+      borderRadius:5,
+      fontWeight: '500',
+      color:'#fff',
       textAlign:'center',
+      backgroundColor:'#d73328',
+      padding:20,
+      marginLeft:40,
+      color:'#fff',
+      width:130,
+  },
+
+  noText:{
+      borderRadius:5,
+      fontWeight: '500',
+      color:'#222',
+      textAlign:'center',
+      backgroundColor:'#f8f8f8',
+      padding:20,
+      marginLeft:40,
+      width:130,
   },
 
   buttonWrapper:{
-     borderTopColor:'#333',
+    left:20,
+     bottom:30,
+     position:'absolute',
      flexDirection: 'row', 
-     alignSelf: 'flex-start',
-     marginTop:5,
+      alignSelf: 'flex-start',
 },
 
   bottomWrapper:{
